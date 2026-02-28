@@ -1,6 +1,6 @@
 from src.Text_Summarizer.constants import CONFIG_FILE_PATH
 from src.Text_Summarizer.utils.common import read_yaml, create_directories
-from src.Text_Summarizer.entity import DataIngestionConfig
+from src.Text_Summarizer.entity import DataIngestionConfig, DataTransformationConfig
 from src.Text_Summarizer.logging import logger
 
 class ConfigurationManager:
@@ -20,3 +20,12 @@ class ConfigurationManager:
             )
         except Exception as e:
             raise e
+    
+    def get_data_transformation_config(self)->DataTransformationConfig:
+        config=self.config.data_transformation
+        create_directories([config.root_dir])
+        return DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            tokenizer_name=config.tokenizer_name
+        )
