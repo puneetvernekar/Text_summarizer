@@ -1,3 +1,6 @@
 venv/
+myenv/
 artifacts/
 logs/
+.conda/
+.train_summ.ipynb

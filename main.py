@@ -1,5 +1,6 @@
 from src.Text_Summarizer.pipeline.pipeline_data_ingestion import DataIngestionTrainingPipeline
 from src.Text_Summarizer.pipeline.pipeline_data_transformation import DataTransformationTrainingPipeline
+from src.Text_Summarizer.pipeline.pipeline_data_train import ModelTrainingPipeline
 from src.Text_Summarizer.logging import logger
 
 STAGE_NAME="Data Ingestion Stage"
@@ -19,6 +20,16 @@ try:
     logger.info(f">>>>>>> Stage {STAGE_NAME} started <<<<<<<")
     data_transformation=DataTransformationTrainingPipeline()
     data_transformation.initiate_data_transformation()
+    logger.info(f">>>>>>> Stage {STAGE_NAME} completed <<<<<<<\n\nx==========x")
+except Exception as e:
+    logger.error(f"Error in stage {STAGE_NAME}: {e}")
+    raise e
+
+STAGE_NAME="Model Training Stage"
+try:
+    logger.info(f">>>>>>> Stage {STAGE_NAME} started <<<<<<<")
+    model_training=ModelTrainingPipeline()
+    model_training.initiate_model_training()
     logger.info(f">>>>>>> Stage {STAGE_NAME} completed <<<<<<<\n\nx==========x")
 except Exception as e:
     logger.error(f"Error in stage {STAGE_NAME}: {e}")
